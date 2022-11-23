@@ -33,13 +33,14 @@ function eraseColor(colorPicker) {
   });
 }
 function changeGridSize() {
+  let value = 16;
+
   let slider = document.getElementById("slider");
-  createGrid();
+  createGrid(value);
   slider.addEventListener("input", (e) => {
-    // container.remove();
     container.innerHTML = "";
     value = e.target.value;
-    createGrid();
+    createGrid(value);
   });
 }
 changeGridSize();
