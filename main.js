@@ -14,6 +14,7 @@ function createGrid(value) {
     container.appendChild(cells[i]);
     cells[i].classList.add("cell");
   }
+  reset(...cells);
 }
 function createTrail() {
   let color;
@@ -35,7 +36,6 @@ function eraseColor(colorPicker) {
 }
 function genRandomColor(colorPicker) {
   const randomBtn = document.querySelector(".random-color");
-
   randomBtn.addEventListener("click", () => {
     let maxVal = 0xffffff;
     let randomNumber = Math.random() * maxVal;
@@ -44,6 +44,16 @@ function genRandomColor(colorPicker) {
     colorPicker.value = `#${randomColor}`;
   });
 }
+function reset(...args) {
+  const resetBtn = document.querySelector(".reset");
+  const cells = [...args];
+  resetBtn.addEventListener("click", () => {
+    cells.forEach((cell) => {
+      cell.style.backgroundColor = "white";
+    });
+  });
+}
+reset();
 function changeGridSize() {
   let value = 16;
   let slider = document.getElementById("slider");
