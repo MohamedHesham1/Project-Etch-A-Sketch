@@ -19,6 +19,7 @@ function createTrail() {
   let color;
   const colorPicker = document.getElementById("color-picker");
   eraseColor(colorPicker);
+  genRandomColor(colorPicker);
   container.addEventListener("mouseover", (e) => {
     color = colorPicker.value;
     e.target.style.backgroundColor = color;
@@ -32,9 +33,19 @@ function eraseColor(colorPicker) {
     colorPicker.value = "#FFFFFF";
   });
 }
+function genRandomColor(colorPicker) {
+  const randomBtn = document.querySelector(".random-color");
+
+  randomBtn.addEventListener("click", () => {
+    let maxVal = 0xffffff;
+    let randomNumber = Math.random() * maxVal;
+    randomNumber = Math.floor(randomNumber);
+    let randomColor = randomNumber.toString(16);
+    colorPicker.value = `#${randomColor}`;
+  });
+}
 function changeGridSize() {
   let value = 16;
-
   let slider = document.getElementById("slider");
   createGrid(value);
   slider.addEventListener("input", (e) => {
