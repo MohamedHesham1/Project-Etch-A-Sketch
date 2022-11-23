@@ -1,7 +1,6 @@
 import "./style.scss";
-let value = 16;
-const container = document.querySelector(".gridContainer");
-function createGrid() {
+const container = document.querySelector(".grid-container");
+function createGrid(value) {
   const cells = [];
   let sliderLabel = document.querySelector(".sliderLabel");
   let CellsNumber = value * value;
@@ -15,11 +14,22 @@ function createGrid() {
     container.appendChild(cells[i]);
     cells[i].classList.add("cell");
   }
-  createTrail(container);
 }
-function createTrail(container) {
+function createTrail() {
+  let color;
+  const colorPicker = document.getElementById("color-picker");
+  eraseColor(colorPicker);
   container.addEventListener("mouseover", (e) => {
-    e.target.style.backgroundColor = "#000000";
+    color = colorPicker.value;
+    e.target.style.backgroundColor = color;
+  });
+}
+createTrail();
+
+function eraseColor(colorPicker) {
+  const eraser = document.querySelector(".eraser");
+  eraser.addEventListener("click", () => {
+    colorPicker.value = "#FFFFFF";
   });
 }
 function changeGridSize() {
