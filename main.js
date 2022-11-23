@@ -1,8 +1,16 @@
 import "./style.scss";
+let value = 16;
+const container = document.querySelector(".gridContainer");
 function createGrid() {
-  const container = document.querySelector(".gridContainer");
   const cells = [];
-  for (let i = 0; i < 256; i++) {
+  let sliderLabel = document.querySelector(".sliderLabel");
+  let CellsNumber = value * value;
+  sliderLabel.innerText = `Grid Size: ${value}*${value}`;
+  container.style.cssText = `  
+    grid-template-columns: repeat(${value}, 1fr);
+    grid-template-rows: repeat(${value}, 1fr);
+    `;
+  for (let i = 0; i < CellsNumber; i++) {
     cells[i] = document.createElement("div");
     container.appendChild(cells[i]);
     cells[i].classList.add("cell");
@@ -14,4 +22,14 @@ function createTrail(container) {
     e.target.style.backgroundColor = "#000000";
   });
 }
-createGrid();
+function changeGridSize() {
+  let slider = document.getElementById("slider");
+  createGrid();
+  slider.addEventListener("input", (e) => {
+    // container.remove();
+    container.innerHTML = "";
+    value = e.target.value;
+    createGrid();
+  });
+}
+changeGridSize();

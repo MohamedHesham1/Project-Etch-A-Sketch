@@ -9,10 +9,17 @@
   <body>
     <div id="app">
       <main>
-        <div class="gridContainer"></div>
+        <section class="tools">
+          <div class="grid-size">
+            <label class="sliderLabel" for="slider"> 16 X 16</label>
+            <input id="slider" type="range" value="16" min="4" max="64" />
+          </div>
+        </section>
+        <section class="grid-section">
+          <div class="gridContainer"></div>
+        </section>
       </main>
     </div>
-
     <script type="module" src="/main.js"></script>
   </body>
 </html>
