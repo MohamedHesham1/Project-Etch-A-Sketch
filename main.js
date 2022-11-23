@@ -1,26 +1,46 @@
 import "./style.scss";
 const container = document.querySelector(".grid-container");
+const sliderLabel = document.querySelector(".sliderLabel");
+
 function createGrid(value) {
-  const cells = [];
-  let sliderLabel = document.querySelector(".sliderLabel");
   let CellsNumber = value * value;
   sliderLabel.innerText = `Grid Size: ${value}*${value}`;
+
   container.style.cssText = `  
     grid-template-columns: repeat(${value}, 1fr);
     grid-template-rows: repeat(${value}, 1fr);
     `;
   for (let i = 0; i < CellsNumber; i++) {
-    cells[i] = document.createElement("div");
-    container.appendChild(cells[i]);
-    cells[i].classList.add("cell");
+    const cell = document.createElement("div");
+    container.appendChild(cell);
+    cell.classList.add("cell");
   }
-  reset(...cells);
+  reset();
 }
+
+function changeGridSize() {
+  const slider = document.getElementById("slider");
+  let value = slider.value;
+
+  slider.addEventListener("input", (e) => {
+    value = e.target.value;
+    sliderLabel.innerText = `Grid Size: ${value}*${value}`;
+  });
+  createGrid(value);
+  slider.addEventListener("change", (e) => {
+    container.innerHTML = "";
+    value = e.target.value;
+    createGrid(value);
+  });
+}
+changeGridSize();
+
 function createTrail() {
   let color;
   const colorPicker = document.getElementById("color-picker");
+
   eraseColor(colorPicker);
-  genRandomColor(colorPicker);
+  generateRandomColor(colorPicker);
   container.addEventListener("mouseover", (e) => {
     color = colorPicker.value;
     e.target.style.backgroundColor = color;
@@ -30,23 +50,28 @@ createTrail();
 
 function eraseColor(colorPicker) {
   const eraser = document.querySelector(".eraser");
+
   eraser.addEventListener("click", () => {
     colorPicker.value = "#FFFFFF";
   });
 }
-function genRandomColor(colorPicker) {
+
+function generateRandomColor(colorPicker) {
   const randomBtn = document.querySelector(".random-color");
+  const maxVal = 0xffffff;
+
   randomBtn.addEventListener("click", () => {
-    let maxVal = 0xffffff;
     let randomNumber = Math.random() * maxVal;
     randomNumber = Math.floor(randomNumber);
     let randomColor = randomNumber.toString(16);
     colorPicker.value = `#${randomColor}`;
   });
 }
-function reset(...args) {
+
+function reset() {
   const resetBtn = document.querySelector(".reset");
-  const cells = [...args];
+  const cells = document.querySelectorAll(".cell");
+
   resetBtn.addEventListener("click", () => {
     cells.forEach((cell) => {
       cell.style.backgroundColor = "white";
@@ -54,14 +79,3 @@ function reset(...args) {
   });
 }
 reset();
-function changeGridSize() {
-  let value = 16;
-  let slider = document.getElementById("slider");
-  createGrid(value);
-  slider.addEventListener("input", (e) => {
-    container.innerHTML = "";
-    value = e.target.value;
-    createGrid(value);
-  });
-}
-changeGridSize();
