@@ -9,22 +9,31 @@
   <body>
     <div id="app">
       <main>
+        <!-- section tools -->
         <section class="tools">
+          <div class="color-wrapper">
+            <input id="color-picker" type="color" aria-label="color picker" />
+          </div>
           <div class="grid-size">
             <label class="sliderLabel" for="slider"> </label>
-            <input id="slider" type="range" value="16" min="4" max="64" />
+            <input
+              id="slider"
+              type="range"
+              value="16"
+              min="4"
+              max="64"
+              aria-label="gird size"
+            />
           </div>
           <div>
-            <input id="color-picker" type="color" />
+            <button class="btn random-color" type="button">Random Color</button>
           </div>
           <div>
-            <button class="random-color" type="button">Random Color!</button>
+            <button class="btn eraser" type="button">Eraser</button>
           </div>
-          <div>
-            <button class="eraser" type="button">Eraser</button>
-          </div>
-          <button class="reset" type="button">RESET</button>
+          <button class="btn reset" type="button">RESET</button>
         </section>
+        <!-- gird section -->
         <section class="grid-section">
           <div class="grid-container"></div>
         </section>
