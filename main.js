@@ -5,7 +5,7 @@ const colorPicker = document.getElementById("color-picker");
 
 function createGrid(value) {
   const cellsNumber = value * value;
-  sliderLabel.innerText = `Grid Size: ${value}*${value}`;
+  sliderLabel.innerText = `Grid Size: ${value} * ${value}`;
 
   for (let i = 0; i < cellsNumber; i++) {
     const cell = document.createElement("div");
@@ -22,11 +22,6 @@ function createGrid(value) {
 function changeGridSize() {
   const slider = document.getElementById("slider");
   let value = slider.value;
-
-  slider.addEventListener("input", (e) => {
-    value = e.target.value;
-    sliderLabel.innerText = `Grid Size: ${value}*${value}`;
-  });
   createGrid(value);
   slider.addEventListener("change", (e) => {
     container.innerHTML = "";
